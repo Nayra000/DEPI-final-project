@@ -1,0 +1,25 @@
+---
+- name: "Build a container with ansible"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: stop current running container
+      command: docker stop depi-app
+      ignore_errors: yes
+
+    - name: remove stopped container
+      command: docker rm depi-app
+      ignore_errors: yes
+
+    - name: remove depi-image
+      command: docker rmi nayra000/depi-image
+      ignore_errors: yes
+
+    - name: build docker image using the Dockerfile
+      command: docker build -t nayra000/depi-image .
+
+    - name: Push depi-image to dockerhub
+      command: docker push nayra000/depi-image
+
+    - name: run container
+      command: docker-compose up -d

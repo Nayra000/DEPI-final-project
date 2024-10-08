@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  node-app:
+    container_name: depi-app
+    image: nayra000/depi-image
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 5000:5000
+    env_file:
+      - ./DEPI-Project/config.env

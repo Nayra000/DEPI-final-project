@@ -1,0 +1,10 @@
+./DEPI-Project/node_modules
+Dockerfile
+.dockerignore
+docker-compose.yml
+./DEPI-Project/package-lock.json
+./DEPI-Project/*.git
+./DEPI-Project/*.env
+*.yml
+jenkinsfile
+
