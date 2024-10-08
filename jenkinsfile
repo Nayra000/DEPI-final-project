@@ -13,11 +13,7 @@ pipeline {
         }
         stage('Run-ansible-playbook') {
             steps {
-              // Run mutliple commands
-              sh """
-              cd ${APPLICATION_DIR}
-              ansible-playbook playbook.yml
-              """
+              sh 'ansible-playbook playbook.yml'
             }
         }
     }
