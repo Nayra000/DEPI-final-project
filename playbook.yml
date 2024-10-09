@@ -15,6 +15,11 @@
       command: docker rmi nayra000/depi-image
       ignore_errors: yes
 
+    - name: copy config.env to build context
+      copy:
+        src: /home/nayra/Desktop/DEPI-final-project/DEPI-Project/config.env
+        dest: /var/lib/jenkins/workspace/DEPI-pipeline/DEPI-Project/config.env
+
     - name: build docker image using the Dockerfile
       command: docker build -t nayra000/depi-image .
 
