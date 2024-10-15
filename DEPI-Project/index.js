@@ -11,6 +11,7 @@ const usersRouter = require('./routers/userRouter');
 const toursRouter = require('./routers/tourRouter');
 const bookingRouter = require('./routers/bookingRouter');
 const reviewsRouter = require('./routers/reviewRouter');
+const checkhealthRouter = require('./routers/checkhealth')
 const viewRouter = require('./routers/viewRouter');
 const AppError = require('./utils/appError');
 const cookieParser = require('cookie-parser');
@@ -100,8 +101,8 @@ app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/tours', toursRouter);
 app.use('/api/v1/reviews', reviewsRouter)
 app.use('/api/v1/bookings', bookingRouter);
+app.use('/api/v1/test', checkhealthRouter);
 app.use('/', viewRouter)
-
 
 
 
