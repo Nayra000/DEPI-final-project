@@ -6,6 +6,12 @@ pipeline {
 	}
 
     stages {
+        stage('run-unit-tests') {
+            steps {
+                sh 'npm install'
+                sh 'npm test'
+            }
+        }
         stage('login-dockerhub') {
             steps {
               sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
