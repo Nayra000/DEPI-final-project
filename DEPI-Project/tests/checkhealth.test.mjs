@@ -1,5 +1,5 @@
 import request from 'supertest';
-import index from '../index';
+import index from '../index.js';
 import { expect } from 'chai';
 
 describe('Check Health API', () => {
