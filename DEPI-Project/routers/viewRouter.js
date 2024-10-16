@@ -23,5 +23,4 @@ Router.post('/submit-user-data', authController.protect, viewController.updateUs
 
 
 
-
 module.exports = Router;
