@@ -7,9 +7,11 @@ pipeline {
 
     stages {
         stage('run-unit-tests') {
-            steps {
-                sh 'npm install'
-                sh 'npm test'
+            dir('./DEPI-Project'){
+                steps {
+                    sh 'npm install'
+                    sh 'npm test'
+                }
             }
         }
         stage('login-dockerhub') {
