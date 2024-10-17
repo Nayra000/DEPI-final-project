@@ -3,6 +3,9 @@ pipeline {
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
 	}
+	tools {
+        nodejs 'node-20.13.1'
+    }
 
     stages {
         stage('run-unit-tests') {
