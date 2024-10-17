@@ -1,9 +1,5 @@
 pipeline {
-     agent {
-        docker {
-            image 'node:20'
-        }
-    }
+
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
 	}
