@@ -15,4 +15,23 @@ describe('Check Health API', () => {
         });
     });
   });
+
+  describe('POST /api/v1/users/singin', () => {
+    it('should login to my account successfully', async () => {
+      const res = await request('http://localhost:5000')
+        .post('/api/v1/users/singin')
+        .send({
+          email: 'ma2001129@gmail.com',
+          password: 'ma2001129@gmail.com',
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+        expect(res.body.status).to.equal('success');
+      expect(res.body).to.have.property('token');
+      expect(res.body.data).to.have.property('user');
+      expect(res.body.data.user.name).to.equal('Mohamed Alaa');
+    });
+  });
 });
