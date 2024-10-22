@@ -19,9 +19,7 @@ This project sets up a fully automated CI/CD pipeline for deploying the Natours 
   - [Jenkins Pipeline](#jenkins-pipeline)
   - [Ansible Playbook](#ansible-playbook)
   - [Unit Tests](#unit-tests)
-- [Running the Project](#running-the-project)
-  - [Local Setup](#project-setup)
-  - [Running CI/CD Pipeline](#running-cicd-pipeline)
+- [Deployment Pipeline](#deployment-pipeline)
 - [License](#license)
 
 ### Prerequisites
@@ -32,10 +30,8 @@ Make sure you have the following installed:
 - Docker Compose (v1.29+)
 - Jenkins (v2.303+)
 - Ansible (v2.10+)
-- Node.js (v20.13+)
-- npm (v8.0+)
 
-You will also need valid credentials for DockerHub and an SSH key for Ansible.
+You will also need valid credentials for [DockerHub](https://hub.docker.com/) and [Github](https://github.com/).
 
 ### Project Setup
 
@@ -43,7 +39,7 @@ You will also need valid credentials for DockerHub and an SSH key for Ansible.
 
 The Dockerfile containerizes application:
 
-```docker
+```sh
     FROM node:20-alpine
 
     WORKDIR /app
@@ -213,31 +209,23 @@ describe('Check Health API', () => {
 });
 ```
 
-### Running the Project
+### Deployment Pipeline
 
-1. Clone the repository:
+The Jenkins pipeline will automatically deploy the Natours application by executing the following stages, as defined in the Jenkinsfile:
 
-```bash
-    git clone https://github.com/your-repo/natours-deployment-pipeline.git
-    cd natours-deployment-pipeline
-```
-
-2. Run the Docker container:
-
-```bash
-    docker-compose up --build
-```
-
-3. The application should be running at `http://localhost:5000`.
-
-### Running CI/CD Pipeline
-
-To trigger the CI/CD pipeline, ensure Jenkins is set up with the provided Jenkinsfile, and the following actions will occur:
-
-- Unit tests will run.
-- A Docker image will be built and pushed to DockerHub.
-- Ansible will deploy the application.
-
+- Unit Testing:
+	- In the run-unit-tests stage, the pipeline navigates to the DEPI-Project directory and installs the necessary project dependencies using npm install.
+	- After the dependencies are installed, unit tests are executed with npm test to ensure the code passes all tests.
+ - DockerHub Login:
+	- In the login-dockerhub stage, Jenkins logs in to DockerHub using credentials securely stored in Jenkins.
+	- The password is passed through the --password-stdin option to securely authenticate Docker operations.
+- Ansible Deployment:
+	- The Run-ansible-playbook stage executes the Ansible playbook (playbook.yml) to deploy the Natours application.
+	- This playbook performs all necessary configurations and deployments to the target environment.
+- Post-Build Notifications:
+	- After the pipeline execution:
+		- If the pipeline succeeds, a success email notification will be sent to youssefnayra26@gmail.com with details about the build, including the job name, build number, and build URL.
+		- If the pipeline fails, a failure notification will be sent to the same email with relevant information about the failure.
 ### License
 
 This project is licensed under the MIT License.
