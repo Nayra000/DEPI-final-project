@@ -214,17 +214,17 @@ describe('Check Health API', () => {
 The Jenkins pipeline will automatically deploy the Natours application by executing the following stages, as defined in the Jenkinsfile:
 
 - Unit Testing:
-	- In the run-unit-tests stage, the pipeline navigates to the DEPI-Project directory and installs the necessary project dependencies using npm install.
-	- After the dependencies are installed, unit tests are executed with npm test to ensure the code passes all tests.
+	- In the run-unit-tests stage, the pipeline navigates to the DEPI-Project directory and installs the necessary project dependencies using `npm install`.
+	- After the dependencies are installed, unit tests are executed with `npm test` to ensure the code passes all tests.
  - DockerHub Login:
 	- In the login-dockerhub stage, Jenkins logs in to DockerHub using credentials securely stored in Jenkins.
-	- The password is passed through the --password-stdin option to securely authenticate Docker operations.
+	- The password is passed through the `--password-stdin` option to securely authenticate Docker operations.
 - Ansible Deployment:
-	- The Run-ansible-playbook stage executes the Ansible playbook (playbook.yml) to deploy the Natours application.
+	- The Run-ansible-playbook stage executes the Ansible playbook `(playbook.yml)` to deploy the Natours application.
 	- This playbook performs all necessary configurations and deployments to the target environment.
 - Post-Build Notifications:
 	- After the pipeline execution:
-		- If the pipeline succeeds, a success email notification will be sent to youssefnayra26@gmail.com with details about the build, including the job name, build number, and build URL.
+		- If the pipeline succeeds, a success email notification will be sent to `youssefnayra26@gmail.com` with details about the build, including the job name, build number, and build URL.
 		- If the pipeline fails, a failure notification will be sent to the same email with relevant information about the failure.
 ### License
 
